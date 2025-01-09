@@ -5,7 +5,7 @@ filepath = sys.argv[1]
 with open(filepath,"r") as file:
     file = file.read()
 file = file.split()
-print(file,len(file))
+# print(file,len(file))
 matrix = [list(row) for row in file]
 cur_dir = None
 cur_row,cur_col = None,None
@@ -46,18 +46,11 @@ right_direction = {
     "south":"west",
     "west":"north"
             }
-unique = {}
 count = 0
 
 def check(row_idx,col_idx,mat,cur_row,cur_col,cur_dir):
-    # print(matrix)
-    matrix[row_idx][col_idx] = "#"
-    # print(matrix)
-    for row in matrix:
-        print(row)
     d = {}
     while 0<= cur_row < len(matrix) and 0<= cur_col < len(matrix[0]):
-        # print(cur_row,cur_col)
         if (cur_row,cur_col) not in d:
             d[(cur_row,cur_col)] = [cur_dir]
         else:
@@ -81,16 +74,22 @@ def check(row_idx,col_idx,mat,cur_row,cur_col,cur_dir):
             # print(cur_dir,cur_row,cur_col)
     return False
 
-print(matrix)
+# print(matrix)
 # assert False
 for row_idx,row in enumerate(matrix):
     for col_idx,ele in enumerate(row):
-        print("row",row_idx,"col",col_idx)
-        new_matrix_object = copy.deepcopy(matrix)
-        print(new_matrix_object[0][0] is matrix[0][0])
-        assert matrix != new_matrix_object,"object are same"
-        result = check(row_idx,col_idx,matrix,cur_row,cur_col,cur_dir)
-        print(result)
-        if result:
-            count += 1
+        if ele != "#":
+            matrix[row_idx][col_idx] = "#"
+            print("row",row_idx,"col",col_idx)
+            # new_matrix_object = copy.deepcopy(matrix)
+            # print(new_matrix_object[0][0] is matrix[0][0])
+            # assert matrix != new_matrix_object,"object are same"
+            print("cur_row_and_column",cur_row,cur_col)
+            result = check(row_idx,col_idx,matrix,cur_row,cur_col,cur_dir)
+            matrix[row_idx][col_idx] = "."
+            print("row and column",cur_row,cur_col)
+            # assert False
+            print(result)
+            if result:
+                count += 1
 print("count",count)
