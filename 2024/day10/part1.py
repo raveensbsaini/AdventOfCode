@@ -7,7 +7,6 @@ file = file.split("\n")
 if file[-1] == "":
     file = file[:-1]
 matrix =[ [int(i) for i in (list(row))] for row in file]
-
 directions = [(-1,0),(+1,0),(0,+1),(0,-1)]
 def check_score(row,col,matrix,height,d={}):
     if height == 9:
